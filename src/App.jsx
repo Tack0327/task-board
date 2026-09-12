@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import DatePicker from './DatePicker.jsx'
 import './App.css'
 
 const STORAGE_KEY = 'task-board:v2'
@@ -123,6 +124,7 @@ function App() {
                       key={task.id}
                       className="task"
                       data-priority={task.priority}
+                      data-status={task.status}
                       draggable
                       onDragStart={(e) => handleDragStart(e, task.id)}
                       onDragOver={(e) => e.preventDefault()}
@@ -150,11 +152,10 @@ function App() {
                             低
                           </button>
                         </div>
-                        <input
-                          type="date"
-                          className={`due-date${isOverdue ? ' overdue' : ''}`}
+                        <DatePicker
                           value={task.dueDate}
-                          onChange={(e) => updateTask(task.id, { dueDate: e.target.value })}
+                          onChange={(dueDate) => updateTask(task.id, { dueDate })}
+                          overdue={isOverdue}
                         />
                       </div>
 
