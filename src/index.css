@@ -1,6 +1,6 @@
 :root {
-  --text: #333;
-  --bg: #fff;
+  --text: #e6e6e6;
+  --bg: #000;
 
   font: 16px/145% system-ui, 'Segoe UI', Roboto, sans-serif;
   color: var(--text);
