@@ -63,13 +63,28 @@
 
 .task {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: 0.5rem;
   padding: 0.5rem 0.6rem;
   background: #1e1e1e;
   border: 1px solid #333;
+  border-left: 4px solid #555;
   border-radius: 6px;
   cursor: grab;
+}
+
+.task[data-priority='high'] {
+  border-left-color: #ff4d4d;
+}
+
+.task[data-priority='low'] {
+  border-left-color: #4d94ff;
+}
+
+.task-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .task-number {
@@ -83,7 +98,68 @@
   word-break: break-word;
 }
 
+.task-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.priority-toggle {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.priority-btn {
+  padding: 0.15rem 0.5rem;
+  font-size: 0.8rem;
+  background: transparent;
+  border: 1px solid #555;
+  border-radius: 4px;
+  color: #999;
+  cursor: pointer;
+}
+
+.priority-btn.high {
+  border-color: #ff4d4d;
+  color: #ff4d4d;
+}
+
+.priority-btn.high.active {
+  background: #ff4d4d;
+  color: #1a1a1a;
+  font-weight: bold;
+}
+
+.priority-btn.low {
+  border-color: #4d94ff;
+  color: #4d94ff;
+}
+
+.priority-btn.low.active {
+  background: #4d94ff;
+  color: #1a1a1a;
+  font-weight: bold;
+}
+
+.due-date {
+  padding: 0.15rem 0.3rem;
+  font-size: 0.8rem;
+  background: #1a1a1a;
+  color: #e6e6e6;
+  border: 1px solid #444;
+  border-radius: 4px;
+}
+
+.due-date.overdue {
+  color: #ff4d4d;
+  border-color: #ff4d4d;
+  font-weight: bold;
+}
+
 .delete-button {
+  align-self: flex-end;
   padding: 0.25rem 0.6rem;
   background: #2a2a2a;
   color: #e6e6e6;

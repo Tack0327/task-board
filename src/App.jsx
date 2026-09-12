@@ -15,6 +15,14 @@ function loadState() {
   return saved ? JSON.parse(saved) : { tasks: [], nextNumber: 1 }
 }
 
+function todayStr() {
+  const now = new Date()
+  const yyyy = now.getFullYear()
+  const mm = String(now.getMonth() + 1).padStart(2, '0')
+  const dd = String(now.getDate()).padStart(2, '0')
+  return `${yyyy}-${mm}-${dd}`
+}
+
 function App() {
   const [{ tasks, nextNumber }, setState] = useState(loadState)
   const [text, setText] = useState('')
@@ -28,10 +36,20 @@ function App() {
     const title = text.trim()
     if (!title) return
     setState((prev) => ({
-      tasks: [...prev.tasks, { id: Date.now(), number: prev.nextNumber, title, status: 'todo' }],
+      tasks: [
+        ...prev.tasks,
+        { id: Date.now(), number: prev.nextNumber, title, status: 'todo', priority: 'low', dueDate: '' },
+      ],
       nextNumber: prev.nextNumber + 1,
     }))
     setText('')
+  }
+
+  const updateTask = (id, changes) => {
+    setState((prev) => ({
+      ...prev,
+      tasks: prev.tasks.map((task) => (task.id === id ? { ...task, ...changes } : task)),
+    }))
   }
 
   const deleteTask = (id) => {
@@ -70,6 +88,8 @@ function App() {
     moveTask(draggedId, status, null)
   }
 
+  const today = todayStr()
+
   return (
     <div className="board">
       <h1>タスクボード</h1>
@@ -96,26 +116,58 @@ function App() {
             <ul className="task-list">
               {tasks
                 .filter((task) => task.status === column.key)
-                .map((task) => (
-                  <li
-                    key={task.id}
-                    className="task"
-                    draggable
-                    onDragStart={(e) => handleDragStart(e, task.id)}
-                    onDragOver={(e) => e.preventDefault()}
-                    onDrop={(e) => handleCardDrop(e, task)}
-                  >
-                    <span className="task-number">No.{task.number}</span>
-                    <span className="task-title">{task.title}</span>
-                    <button
-                      type="button"
-                      className="delete-button"
-                      onClick={() => deleteTask(task.id)}
+                .map((task) => {
+                  const isOverdue = Boolean(task.dueDate) && task.dueDate < today
+                  return (
+                    <li
+                      key={task.id}
+                      className="task"
+                      data-priority={task.priority}
+                      draggable
+                      onDragStart={(e) => handleDragStart(e, task.id)}
+                      onDragOver={(e) => e.preventDefault()}
+                      onDrop={(e) => handleCardDrop(e, task)}
                     >
-                      削除
-                    </button>
-                  </li>
-                ))}
+                      <div className="task-header">
+                        <span className="task-number">No.{task.number}</span>
+                        <span className="task-title">{task.title}</span>
+                      </div>
+
+                      <div className="task-meta">
+                        <div className="priority-toggle" role="group" aria-label="優先度">
+                          <button
+                            type="button"
+                            className={`priority-btn high${task.priority === 'high' ? ' active' : ''}`}
+                            onClick={() => updateTask(task.id, { priority: 'high' })}
+                          >
+                            高
+                          </button>
+                          <button
+                            type="button"
+                            className={`priority-btn low${task.priority === 'low' ? ' active' : ''}`}
+                            onClick={() => updateTask(task.id, { priority: 'low' })}
+                          >
+                            低
+                          </button>
+                        </div>
+                        <input
+                          type="date"
+                          className={`due-date${isOverdue ? ' overdue' : ''}`}
+                          value={task.dueDate}
+                          onChange={(e) => updateTask(task.id, { dueDate: e.target.value })}
+                        />
+                      </div>
+
+                      <button
+                        type="button"
+                        className="delete-button"
+                        onClick={() => deleteTask(task.id)}
+                      >
+                        削除
+                      </button>
+                    </li>
+                  )
+                })}
             </ul>
           </div>
         ))}
