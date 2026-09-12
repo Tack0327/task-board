@@ -1,0 +1,16 @@
+:root {
+  --text: #333;
+  --bg: #fff;
+
+  font: 16px/145% system-ui, 'Segoe UI', Roboto, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+}
+
+body {
+  margin: 0;
+}
+
+h1 {
+  font-size: 28px;
+}
