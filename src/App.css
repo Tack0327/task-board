@@ -48,7 +48,21 @@
 .column h2 {
   margin: 0 0 0.75rem;
   font-size: 16px;
+  font-weight: bold;
+  text-align: center;
   color: #ccc;
+}
+
+.column[data-status='ongoing'] h2 {
+  color: #4d94ff;
+}
+
+.column[data-status='review'] h2 {
+  color: #4dd68c;
+}
+
+.column[data-status='done'] h2 {
+  color: #999;
 }
 
 .task-list {

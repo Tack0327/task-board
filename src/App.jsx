@@ -110,6 +110,7 @@ function App() {
           <div
             key={column.key}
             className="column"
+            data-status={column.key}
             onDragOver={(e) => e.preventDefault()}
             onDrop={(e) => handleColumnDrop(e, column.key)}
           >
