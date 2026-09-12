@@ -81,19 +81,14 @@
   border-left-color: #4d94ff;
 }
 
-.task[data-status='todo'] {
+.task[data-status='ongoing'] {
   background: #16202e;
   border-color: #24384f;
 }
 
-.task[data-status='ongoing'] {
-  background: #2e2410;
-  border-color: #4a3a12;
-}
-
 .task[data-status='review'] {
-  background: #241a2e;
-  border-color: #3a2a4a;
+  background: #14261a;
+  border-color: #1f4a30;
 }
 
 .task[data-status='done'] {

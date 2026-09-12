@@ -5,7 +5,7 @@ import './App.css'
 const STORAGE_KEY = 'task-board:v2'
 
 const COLUMNS = [
-  { key: 'todo', label: 'To Do' },
+  { key: 'todo', label: 'Open' },
   { key: 'ongoing', label: 'On going' },
   { key: 'review', label: 'Review' },
   { key: 'done', label: 'Done' },
