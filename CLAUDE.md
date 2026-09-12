@@ -51,6 +51,13 @@ task-board/
   4. `git push` で GitHub リポジトリに反映する
 - ローカルに変更を残したままにせず、都度リモートリポジトリへ同期する。
 
+## デプロイ（GitHub Pages）
+
+- `main` ブランチへの push をトリガーに `.github/workflows/deploy.yml` が自動ビルド・デプロイを行う。
+- `vite.config.js` の `base` はリポジトリ名 `/task-board/` に固定している（GitHub Pages のプロジェクトサイトはサブパス配信のため）。
+- 公開URL: https://Tack0327.github.io/task-board/
+- リポジトリ設定 → Pages → Source を「GitHub Actions」にしておく必要がある（初回のみ）。
+
 ## 回答言語
 
 このプロジェクトに関するやり取りでは、**必ず日本語で回答すること**。
