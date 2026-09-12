@@ -9,9 +9,11 @@
 
 ## 技術スタック
 
-- React（Vite で構築）
+- React 19（Vite 8 で構築）
 - JavaScript（JSX）
-- CSS
+- CSS（プレーンCSS、フレームワークやCSS-in-JSは使用しない）
+- 状態管理は `useState` / `useEffect` のみ（外部の状態管理ライブラリは導入しない）
+- データ永続化は `localStorage`（バックエンド・DBは使用しない）
 
 ## ディレクトリ構成
 
@@ -40,6 +42,14 @@ task-board/
 - コメントは「なぜそうしているか」が自明でない箇所にのみ最小限で記載する。
 - 不要な抽象化やライブラリ導入は避け、シンプルな実装を優先する。
 
+## コンポーネント命名規約
+
+- コンポーネント名はパスカルケース（例: `App`）とし、ファイル名もコンポーネント名と一致させる（`App.jsx`）。
+- コンポーネントに対応するスタイルシートは同名の `.css` ファイルとする（例: `App.jsx` → `App.css`）。
+- イベントハンドラ関数は「動詞 + 対象」の形で命名する（例: `addTask`, `toggleTask`, `deleteTask`）。
+- 状態変数はキャメルケースで、内容が分かる名前にする（例: `tasks`, `text`）。
+- コンポーネントが増える場合も1コンポーネント1ファイルとし、`src/` 直下にフラットに配置する（ディレクトリ階層は複雑にしない）。
+
 ## Git運用ルール
 
 - **コードを変更するたびに、必ず GitHub にプッシュすること。**
@@ -55,8 +65,11 @@ task-board/
 
 - `main` ブランチへの push をトリガーに `.github/workflows/deploy.yml` が自動ビルド・デプロイを行う。
 - `vite.config.js` の `base` はリポジトリ名 `/task-board/` に固定している（GitHub Pages のプロジェクトサイトはサブパス配信のため）。
-- 公開URL: https://Tack0327.github.io/task-board/
 - リポジトリ設定 → Pages → Source を「GitHub Actions」にしておく必要がある（初回のみ）。
+
+## デプロイ先
+
+https://Tack0327.github.io/task-board/
 
 ## 回答言語
 
