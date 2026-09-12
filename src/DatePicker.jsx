@@ -60,6 +60,7 @@ function DatePicker({ value, onChange, overdue }) {
     <div className="date-picker">
       <button
         type="button"
+        draggable={false}
         className={`date-picker-trigger${overdue ? ' overdue' : ''}`}
         onClick={toggleOpen}
       >
@@ -71,11 +72,11 @@ function DatePicker({ value, onChange, overdue }) {
           <div className="date-picker-backdrop" onClick={() => setOpen(false)} />
           <div className="date-picker-calendar">
             <div className="date-picker-header">
-              <button type="button" onClick={() => changeMonth(-1)} aria-label="前の月">
+              <button type="button" draggable={false} onClick={() => changeMonth(-1)} aria-label="前の月">
                 ‹
               </button>
               <span>{viewYear}年{viewMonth + 1}月</span>
-              <button type="button" onClick={() => changeMonth(1)} aria-label="次の月">
+              <button type="button" draggable={false} onClick={() => changeMonth(1)} aria-label="次の月">
                 ›
               </button>
             </div>
@@ -92,6 +93,7 @@ function DatePicker({ value, onChange, overdue }) {
                   <button
                     type="button"
                     key={dateStr}
+                    draggable={false}
                     className={`date-picker-day${dateStr === value ? ' selected' : ''}`}
                     onClick={() => selectDay(day)}
                   >

@@ -140,6 +140,7 @@ function App() {
                         <div className="priority-toggle" role="group" aria-label="優先度">
                           <button
                             type="button"
+                            draggable={false}
                             className={`priority-btn high${task.priority === 'high' ? ' active' : ''}`}
                             onClick={() => updateTask(task.id, { priority: 'high' })}
                           >
@@ -147,6 +148,7 @@ function App() {
                           </button>
                           <button
                             type="button"
+                            draggable={false}
                             className={`priority-btn low${task.priority === 'low' ? ' active' : ''}`}
                             onClick={() => updateTask(task.id, { priority: 'low' })}
                           >
@@ -162,6 +164,7 @@ function App() {
 
                       <button
                         type="button"
+                        draggable={false}
                         className="delete-button"
                         onClick={() => deleteTask(task.id)}
                       >
